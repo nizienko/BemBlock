@@ -41,10 +41,6 @@ public class YandexTest {
                 .clickSearchButton();
 
         assertThat(
-                serpPage.atSerpListBlock().getBem(),
-                should(displayed()).whileWaitingUntil(timeoutHasExpired(2000)));
-
-        assertThat(
                 serpPage.atSerpListBlock().hasItemWithSubtitle("tech.yandex.ru"),
                 is(true));
     }
