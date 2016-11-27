@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 @BemDescription(block = "serp-list")
-public class SerpListBlock extends AbstractBemBlock{
+public class SerpListBlock extends AbstractBemBlock {
 
     public List<SerpItemBlock> getSerpList() {
         return new BemListLoader<SerpItemBlock>(

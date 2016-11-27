@@ -1,6 +1,7 @@
 package bem;
 
 import org.openqa.selenium.*;
+
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +10,17 @@ import java.util.List;
  * Created by nizienko on 15.11.2016.
  */
 public abstract class AbstractBemObject implements BemExtended {
-    private String name;
-    private SearchContext searchContext;
-    private BemExtended parentBemObject;
-    private BemObjectType bemObjectType;
-
+    private final static String CONTAINS_TEMPLATE = "[contains(concat(' ', @class, ' '), ' %s ')]";
+    private final static String HAS_STRING_TEMPLATE = "[text()='%s']";
+    private final static String WITH_STRING_TEMPLATE = ".//*[contains(text(), '%s')]";
     private final List<String> modifiers = new ArrayList<>();
     private final List<BemExtended> mixedBemObjects = new ArrayList<>();
     private final List<BemExtended> hasBemObjects = new ArrayList<>();
     private final List<String> xpathList = new ArrayList<>();
-
+    private String name;
+    private SearchContext searchContext;
+    private BemExtended parentBemObject;
+    private BemObjectType bemObjectType;
     private int index = 0;
 
     @Override
@@ -42,18 +44,12 @@ public abstract class AbstractBemObject implements BemExtended {
         this.parentBemObject = parentObject;
     }
 
-    private final static String CONTAINS_TEMPLATE = "[contains(concat(' ', @class, ' '), ' %s ')]";
-    private final static String HAS_STRING_TEMPLATE = "[text()='%s']";
-    private final static String WITH_STRING_TEMPLATE = ".//*[contains(text(), '%s')]";
-
-
-    public String getFullXpath(){
+    public String getFullXpath() {
         final StringBuilder xpath = new StringBuilder();
 
         if (parentBemObject != null) {
             xpath.append(parentBemObject.getFullXpath());
-        }
-        else {
+        } else {
             xpath.append(".");
         }
 
@@ -117,8 +113,7 @@ public abstract class AbstractBemObject implements BemExtended {
             if (parentBemObject == null) {
                 throw new IllegalArgumentException(
                         String.format("Элемент %s не может быть сам по себе, должен находится в блоке", name));
-            }
-            else {
+            } else {
                 BemExtended parentBlock = parentBemObject;
                 while (parentBlock != null
                         && parentBlock.getType() != BemObjectType.BLOCK) {
@@ -127,8 +122,7 @@ public abstract class AbstractBemObject implements BemExtended {
                 if (parentBlock.getType() == BemObjectType.BLOCK) {
                     final String parentBlockName = parentBlock.getName();
                     return parentBlockName + "__" + name;
-                }
-                else {
+                } else {
                     throw new IllegalArgumentException(
                             String.format("Элемент %s не может быть сам по себе, должен находится в блоке", name));
                 }
@@ -281,8 +275,7 @@ public abstract class AbstractBemObject implements BemExtended {
     public boolean isDisplayed() {
         try {
             return getThisElement().isDisplayed();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }

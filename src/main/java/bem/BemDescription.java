@@ -13,10 +13,15 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface BemDescription {
     String block() default "";
+
     String element() default "";
+
     Modifier[] modifiers() default {};
+
     boolean noAncestors() default false;
+
     String hasText() default "";
+
     MixedBlock[] mixed() default {};
 
     // modifiers = @bem.Modifier(key = "name", value = "some_value")

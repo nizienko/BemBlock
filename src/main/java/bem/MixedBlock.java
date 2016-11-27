@@ -13,6 +13,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.ANNOTATION_TYPE})
 public @interface MixedBlock {
     String block() default "";
+
     String element() default "";
+
     Modifier[] modifiers() default {};
 }

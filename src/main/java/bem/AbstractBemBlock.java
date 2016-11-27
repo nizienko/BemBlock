@@ -10,11 +10,6 @@ public abstract class AbstractBemBlock implements IBemBlock {
     protected WebDriver webDriver;
 
     @Override
-    public void setBem(Bem bem) {
-        this.thisBem = bem;
-    }
-
-    @Override
     public void setWebDriver(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -27,5 +22,10 @@ public abstract class AbstractBemBlock implements IBemBlock {
     @Override
     public Bem getBem() {
         return thisBem;
+    }
+
+    @Override
+    public void setBem(Bem bem) {
+        this.thisBem = bem;
     }
 }

@@ -12,11 +12,11 @@ import static ru.yandex.qatools.matchers.decorators.MatcherDecorators.timeoutHas
  * Created by def on 26.11.16.
  */
 public class YandexPage extends AbstractPage {
+    private SearchBlock searchBlock;
+
     public YandexPage(WebDriver webDriver) {
         super(webDriver);
     }
-
-    private SearchBlock searchBlock;
 
     public YandexPage open() {
         webDriver.get("https://yandex.ru");

@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  */
 public class BemBlockFactory {
 
-    public static void initBlocksOnPage(WebDriver webDriver, Bem parentBlock, Object page){
+    public static void initBlocksOnPage(WebDriver webDriver, Bem parentBlock, Object page) {
         Class pageClass = page.getClass();
         while (pageClass != Object.class) {
             for (Field field : pageClass.getDeclaredFields()) {
@@ -42,8 +42,7 @@ public class BemBlockFactory {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
-        else if (Bem.class.isAssignableFrom(field.getType())) {
+        } else if (Bem.class.isAssignableFrom(field.getType())) {
             BemDescription bemDescription = field.getAnnotation(BemDescription.class);
             if (bemDescription != null) {
                 try {
@@ -66,7 +65,7 @@ public class BemBlockFactory {
             initBlocksOnPage(webDriver, bem, bemBlock);
 
             bemBlock.describeBem();
-        return bemBlock;
+            return bemBlock;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             throw new IllegalStateException(
@@ -81,11 +80,9 @@ public class BemBlockFactory {
                     searchContext,
                     bemDescription.noAncestors() ? null : parentBem,
                     BemObjectType.BLOCK);
-        }
-        else if (parentBem != null){
+        } else if (parentBem != null) {
             bem = parentBem;
-        }
-        else {
+        } else {
             throw new IllegalStateException("Элемент не имеет смысла вне контекста блока. Не удается инициализировать bem объект, отсутствует имя блока.");
         }
         if (bemDescription.element().length() > 0) {
