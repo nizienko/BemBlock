@@ -32,7 +32,7 @@ public class YandexTest {
     public void searchTest() {
         final SerpPage serpPage = new YandexPage(webDriver)
                 .open()
-                .fillSearchField("bem")
+                .fillSearchField("bem2")
                 .clickSearchButton();
 
         assertThat(
